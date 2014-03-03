@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h2(class="alert alert-danger")= 'ERROR: ' + title
+  if error
+    dl
+      - for (var key in error)
+        dt= key
+        dd= error[key]
+  else
+    p Unknown error

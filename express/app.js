@@ -6,6 +6,7 @@
 var express = require('express')
   , routes = require('./routes')
   , lists = require('./routes/lists')
+  , folders = require('./routes/folders')
   , reports = require('./routes/reports')
   , http = require('http')
   , path = require('path')
@@ -48,6 +49,8 @@ app.get('/', routes.index);
 app.get('/lists', lists.list);
 app.get('/lists/:id', lists.view);
 app.post('/lists/:id/subscribe', lists.subscribe);
+app.get('/folders', folders.list);
+app.get('/folders/:type', folders.list);
 app.get('/reports', reports.list);
 app.get('/reports/:id', reports.view);
 

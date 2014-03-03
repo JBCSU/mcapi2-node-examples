@@ -1,16 +1,28 @@
-doctype 5
+doctype html
 html
   head
     title= title + ' | MC API Node.js Example'
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
+    script(src='http://getbootstrap.com/dist/js/bootstrap.min.js')
+    block head
   body
     div(class="container")
       div(class="navbar",style="margin-top:20px")
         div(class="navbar-inner")
           a(class="brand", href="/") MC API Node.js Example
-          ul(class="nav")
+          ul(class="nav navbar-nav")
             li
               a(href="/lists") Lists
+            li(class="dropdown")
+              a(href="#" class="dropdown-toggle" data-toggle="dropdown")!= 'Folders <b class="caret"></b>'
+              ul(class="dropdown-menu")
+                li
+                  a(href="/folders/campaign") Campaign
+                li
+                  a(href="/folders/template") Template
+                li
+                  a(href="/folders/autoresponder") Autoresponder
             li
               a(href="/reports") Reports
       if success_flash
@@ -19,3 +31,4 @@ html
         p(class="text-error")= error_flash
       div(class="content")
         block content
+  block foot

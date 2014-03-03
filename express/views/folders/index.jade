@@ -1,0 +1,37 @@
+extends ../layout
+
+block content
+  h2= title
+  if folders.length
+    table(class='table table-bordered')
+      tr
+        each header in ['ID', 'Name', 'Type', 'Date Created', '# Items', 'Actions']
+          th= header
+      each folder in folders
+        tr
+          td= folder.folder_id
+          td= folder.name
+          td= folder.type
+          td= folder.date_created
+          td= folder.cnt
+          td
+            button(class="btn btn-info" type="button" data-action="renameFolder" data-id=folder.folder_id data-name=folder.name data-type=folder.type) Rename
+            button(class="btn btn-danger" type="button" data-action="deleteFolder" data-id=folder.folder_id data-name=folder.name data-type=folder.type) Delete
+  else
+    p(class="alert alert-warning")= 'You have no ' + type + ' folders'
+
+block foot
+  script.
+    $('button[data-action=renameFolder]').click(function(ev){
+      var name = prompt("Enter a new name for " + this.dataset.name);
+      if (name != null) {
+        alert("I would've renamed " + this.dataset.name + " to " + name);
+      }
+    });
+    $('button[data-action=deleteFolder]').click(function(ev){
+      if (confirm('Are you sure you want to delete the ' + this.dataset.name + ' folder?')) {
+        alert("I would've deleted it.");
+      } else {
+        alert("Phew! Glad I didn't have to do that!");
+      }
+    });
