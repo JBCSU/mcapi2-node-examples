@@ -51,6 +51,9 @@ app.get('/lists/:id', lists.view);
 app.post('/lists/:id/subscribe', lists.subscribe);
 app.get('/folders', folders.list);
 app.get('/folders/:type', folders.list);
+app.get('/folders/add', folders.add);
+app.get('/folders/:id/rename', folders.rename);
+app.get('/folders/:id/delete', folders.delete);
 app.get('/reports', reports.list);
 app.get('/reports/:id', reports.view);
 

@@ -2,6 +2,9 @@ extends ../layout
 
 block content
   h2= title
+  if msg
+    div(class="alert alert-success")= msg
+  button(class="btn btn-info" type="button" data-action="addFolder" data-type=type style="float:right;margin-bottom:0.5em") Add a folder
   if folders.length
     table(class='table table-bordered')
       tr
@@ -22,16 +25,20 @@ block content
 
 block foot
   script.
+    $('button[data-action=addFolder]').click(function(ev){
+      var name = prompt("Enter folder name");
+      if (name != null) {
+        window.location.href='/folders/add?type='+this.dataset.type+'&name='+encodeURIComponent(name);
+      }
+    });
     $('button[data-action=renameFolder]').click(function(ev){
       var name = prompt("Enter a new name for " + this.dataset.name);
       if (name != null) {
-        alert("I would've renamed " + this.dataset.name + " to " + name);
+        window.location.href='/folders/'+this.dataset.id+'/rename?type='+this.dataset.type+'&name='+encodeURIComponent(name);
       }
     });
     $('button[data-action=deleteFolder]').click(function(ev){
       if (confirm('Are you sure you want to delete the ' + this.dataset.name + ' folder?')) {
-        alert("I would've deleted it.");
-      } else {
-        alert("Phew! Glad I didn't have to do that!");
+        window.location.href='/folders/'+this.dataset.id+'/delete?type='+this.dataset.type;
       }
     });
